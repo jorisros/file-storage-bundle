@@ -1,4 +1,15 @@
 services:
-#    file_storage.example:
-#        class: JorisRos\FileStorageBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    file_storage.transport.local_file:
+        autowire: true
+        autoconfigure: true
+        public: true
+        class: JorisRos\FileStorage\Transport\LocaleFile
+        bind:
+            $parameters: "test"
+
+    file_storage.file_storage_service:
+        autowire: true
+        autoconfigure: true
+        public: true
+        class: JorisRos\FileStorage\FileStorageService
+        arguments: ["@file_storage.transport.local_file"]
